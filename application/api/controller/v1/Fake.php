@@ -17,8 +17,9 @@ class Fake extends Api
     protected $noNeedRight = ['*'];
 
     /**
-     * 测试接口
-     *
+     * 测试接口【授权流程】
+     * 1：抖音静默获取授权码：https://developer.open-douyin.com/docs/resource/zh-CN/dop/develop/openapi/account-permission/douyin-get-permission-code
+     * 2：获取的code可以用来调用https://open.douyin.com/oauth/access_token/ 换取用户open_id：https://developer.open-douyin.com/docs/resource/zh-CN/dop/develop/openapi/account-permission/get-access-token
      */
     public function test(Request $request)
     {
