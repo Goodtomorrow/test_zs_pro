@@ -10,16 +10,11 @@
 // | Author: liu21st <liu21st@gmail.com>
 // +----------------------------------------------------------------------
 
-return [
-    //别名配置,别名只能是映射到控制器且访问时必须加上请求的方法
-    '__alias__'   => [
-    ],
-    //变量规则
-    '__pattern__' => [
-    ],
-//        域名绑定到模块
-//        '__domain__'  => [
-//            'admin' => 'admin',
-//            'api'   => 'api',
-//        ],
-];
+use think\Route;
+
+/**
+ * API路由
+ */
+Route::group('fake',function () {
+    Route::post('test','/api/v1/fake/test');
+});

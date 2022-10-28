@@ -259,7 +259,7 @@ return [
         // 缓存有效期 0表示永久缓存
         'expire'   => 0,
     ],
-    //FastAdmin配置
+    //  FastAdmin配置
     'fastadmin'              => [
         //是否开启前台会员中心
         'usercenter'            => true,
@@ -300,4 +300,15 @@ return [
         //API接口地址
         'api_url'               => 'https://api.fastadmin.net',
     ],
+    //  语言包加载
+    'lang' =>[
+        'path' => Env::get('lang.lang_path', '')
+    ],
+    //  获客
+    'guests' => [
+        'douyin' => [
+            'base_uri' => 'open.douyin.com',
+            'keywords-video-search-url'=> Env::get('douyin.keywords-video-search-url', '')
+        ]
+    ]
 ];
