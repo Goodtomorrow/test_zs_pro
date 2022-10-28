@@ -3,8 +3,10 @@
 namespace app\api\controller\v1;
 
 use app\common\controller\Api;
+use app\common\services\guest\DyServices;
 use GuzzleHttp\Client;
 use think\Lang;
+use think\Request;
 
 /**
  * 首页接口 Fake
@@ -18,6 +20,31 @@ class Fake extends Api
      * 测试接口
      *
      */
+    public function test2(Request $request)
+    {
+        //  获取参数
+        $id = $request->post('id', '');
+        if (!$id) $this->error('参数必传！');
+        $keyswords = "";
+        //  1：获取授权
+        $getAccessToken = DyServices::getAccessToken();
+        //  2：判断授权是否成功
+        switch ($getAccessToken['code']){
+            case "0":       //  授权失败
+                $this->error('授权失败，请重试！');
+                break;
+            case "1":       //  授权成功    开始关键字搜索
+                $result = DyServices::keywordsSearchVideo($getAccessToken['access_token'], $keyswords);
+                switch ($result['code']){
+                    case "0":       //  获取失败
+                        break;
+                    case "1":       //  获取成功
+                        break;
+                }
+                break;
+        }
+    }
+
     public function test()
     {
         //  加载语言包
