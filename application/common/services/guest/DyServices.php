@@ -14,6 +14,41 @@ use think\Lang;
 class DyServices
 {
     /**
+     * 获取授权Code
+     */
+    public static function getCode()
+    {
+        //  加载语言包
+        Lang::load(APP_PATH . config('lang.path'));
+        //  GET参数
+        $params = http_build_query([
+            'open_id'=>'ba253642-0590-40bc-9bdf-9a1334b94059',
+            'cursor'=>0
+        ]);
+        //  获取codeApi地址
+        $url = config('guests.douyin')['keywords-video-search-url']."/?".$params;
+        //  请求header头
+        $header = [
+            'Accept' => '*/*',
+            'Connection' => 'keep-alive',
+            'Host' => 'https://'.config('guests.douyin')['base_uri']
+        ];
+        //  开始实例化类
+        $client = new Client([
+            'base_uri' => config('guests.douyin')['base_uri'],
+            'timeout' => 5.0,
+            'headers' => $header
+        ]);
+        //  开始发送请求
+        $response = $client->request('GET', $url);
+        //  判断请求是否成功
+        if ($response->getStatusCode() !== 200) return ['code'=>0,'msg'=>'failed','data'=>$response];
+        //  将响应结果输出
+        $result = json_decode($response->getBody(), true);
+        return ['code'=>1,'msg'=>'success','data'=>$result];
+    }
+
+    /**
      * 获取授权AccessToken
      */
     public static function getAccessToken()

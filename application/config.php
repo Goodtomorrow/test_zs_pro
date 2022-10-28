@@ -307,7 +307,9 @@ return [
     //  获客
     'guests' => [
         'douyin' => [
-            'base_uri' => 'open.douyin.com',
+            'code-url' => Env::get('code-url', ''),
+            'access_token_url' => Env::get('access-token-url', ''),
+            'base_uri' => Env::get('open.douyin.com', ''),
             'keywords-video-search-url'=> Env::get('douyin.keywords-video-search-url', '')
         ]
     ]
