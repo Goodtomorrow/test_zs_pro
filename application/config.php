@@ -18,7 +18,7 @@ return [
     // 应用命名空间
     'app_namespace'          => 'app',
     // 应用调试模式
-    'app_debug'              => Env::get('app.debug', true),
+    'app_debug'              => Env::get('app.debug', false),
     // 应用Trace
     'app_trace'              => Env::get('app.trace', false),
     // 应用模式状态
@@ -253,7 +253,7 @@ return [
         // 驱动方式
         'type'     => 'Mysql',
         // 缓存前缀
-        'key'      => 'yXB2sFeZQ1P9n78zVNf0mMoR6T3HiIJ5',
+        'key'      => 'i3d6o32wo8fvs1fvdpwens',
         // 加密方式
         'hashalgo' => 'ripemd160',
         // 缓存有效期 0表示永久缓存
