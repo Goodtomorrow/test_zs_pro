@@ -20,7 +20,7 @@ class Fake extends Api
      * 测试接口
      *
      */
-    public function test2(Request $request)
+    public function test(Request $request)
     {
         //  获取参数
         $id = $request->post('id', '');
@@ -32,20 +32,23 @@ class Fake extends Api
         switch ($getAccessToken['code']){
             case "0":       //  授权失败
                 $this->error('授权失败，请重试！');
-                break;
+            break;
             case "1":       //  授权成功    开始关键字搜索
                 $result = DyServices::keywordsSearchVideo($getAccessToken['access_token'], $keyswords);
                 switch ($result['code']){
-                    case "0":       //  获取失败
-                        break;
-                    case "1":       //  获取成功
-                        break;
+                    case "0":       //  关键字搜索视频接口发起失败
+                        $this->error($result['msg']);
+                    break;
+                    case "1":       //  关键字搜索视频接口发起成功
+                        if (isset($result['data']['extra']['error_code']) && $result['data']['extra']['error_code'] != 0) $this->error($result['data']['extra']['description']);
+                        $this->success($result['data']);
+                    break;
                 }
-                break;
+            break;
         }
     }
 
-    public function test()
+    public function test2()
     {
         //  加载语言包
         Lang::load(APP_PATH . config('lang.path'));
